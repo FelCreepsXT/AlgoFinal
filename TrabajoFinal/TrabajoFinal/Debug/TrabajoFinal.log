@@ -1,8 +1,0 @@
-﻿  Buscador.cpp
-c:\users\lucia\onedrive\escritorio\creadopormi\trabajofinal\trabajofinal\Buscador.h(213): warning C4244: 'inicializando': conversión de '__int64' a 'double'; posible pérdida de datos
-c:\users\lucia\onedrive\escritorio\creadopormi\trabajofinal\trabajofinal\Buscador.h(228): warning C4620: no se encontró ninguna forma postfija de 'operator ++' para el tipo 'cLista<cAlmacenador>::cIterador'; se utiliza la forma de prefijo
-  c:\users\lucia\onedrive\escritorio\creadopormi\trabajofinal\trabajofinal\cLista.h(11): note: vea la declaración de 'cLista<cAlmacenador>::cIterador'
-  c:\users\lucia\onedrive\escritorio\creadopormi\trabajofinal\trabajofinal\Buscador.h(222): note: vea la referencia a la creación de instancias de plantilla de función 'void TrabajoFinal::Buscador::ShowList<cAlmacenador>(cLista<cAlmacenador>)' que se está compilando
-  Buscador.obj : /DEBUG:FASTLINK no se admite cuando hay presente código administrado; reiniciando vínculo con /DEBUG:FULL
-  TrabajoFinal.vcxproj -> C:\Users\lucia\OneDrive\Escritorio\CreadoPorMi\TrabajoFinal\Debug\TrabajoFinal.exe
-  TrabajoFinal.vcxproj -> C:\Users\lucia\OneDrive\Escritorio\CreadoPorMi\TrabajoFinal\Debug\TrabajoFinal.pdb (Partial PDB)
