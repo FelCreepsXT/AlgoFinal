@@ -45,7 +45,9 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::Label^  lblTitulo;
 	private: System::Windows::Forms::Label^  lblArchivo;
 	private: System::Windows::Forms::ListBox^  lstArchi;
+
 	private: System::Windows::Forms::Button^  BtnEsc;
+	
 
 
 
@@ -78,7 +80,7 @@ namespace TrabajoFinal {
 			this->BtnBuscador->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->BtnBuscador->ForeColor = System::Drawing::Color::White;
-			this->BtnBuscador->Location = System::Drawing::Point(375, 97);
+			this->BtnBuscador->Location = System::Drawing::Point(522, 96);
 			this->BtnBuscador->Name = L"BtnBuscador";
 			this->BtnBuscador->Size = System::Drawing::Size(119, 29);
 			this->BtnBuscador->TabIndex = 0;
@@ -90,7 +92,7 @@ namespace TrabajoFinal {
 			// 
 			this->TxtBuscador->Location = System::Drawing::Point(72, 102);
 			this->TxtBuscador->Name = L"TxtBuscador";
-			this->TxtBuscador->Size = System::Drawing::Size(297, 20);
+			this->TxtBuscador->Size = System::Drawing::Size(444, 20);
 			this->TxtBuscador->TabIndex = 1;
 			// 
 			// lblTitulo
@@ -101,7 +103,7 @@ namespace TrabajoFinal {
 			this->lblTitulo->ForeColor = System::Drawing::Color::White;
 			this->lblTitulo->Location = System::Drawing::Point(0, 0);
 			this->lblTitulo->Name = L"lblTitulo";
-			this->lblTitulo->Size = System::Drawing::Size(507, 68);
+			this->lblTitulo->Size = System::Drawing::Size(655, 68);
 			this->lblTitulo->TabIndex = 2;
 			this->lblTitulo->Text = L"FILEEXP";
 			this->lblTitulo->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -120,7 +122,7 @@ namespace TrabajoFinal {
 			this->lstArchi->FormattingEnabled = true;
 			this->lstArchi->Location = System::Drawing::Point(12, 162);
 			this->lstArchi->Name = L"lstArchi";
-			this->lstArchi->Size = System::Drawing::Size(482, 303);
+			this->lstArchi->Size = System::Drawing::Size(629, 303);
 			this->lstArchi->TabIndex = 4;
 			// 
 			// BtnEsc
@@ -129,7 +131,7 @@ namespace TrabajoFinal {
 			this->BtnEsc->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->BtnEsc->ForeColor = System::Drawing::Color::White;
-			this->BtnEsc->Location = System::Drawing::Point(218, 128);
+			this->BtnEsc->Location = System::Drawing::Point(312, 128);
 			this->BtnEsc->Name = L"BtnEsc";
 			this->BtnEsc->Size = System::Drawing::Size(89, 32);
 			this->BtnEsc->TabIndex = 5;
@@ -141,7 +143,7 @@ namespace TrabajoFinal {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(506, 470);
+			this->ClientSize = System::Drawing::Size(653, 470);
 			this->Controls->Add(this->lstArchi);
 			this->Controls->Add(this->BtnEsc);
 			this->Controls->Add(this->lblArchivo);
@@ -165,6 +167,8 @@ namespace TrabajoFinal {
 		FolderBrowserDialog ^Archivo = gcnew FolderBrowserDialog();
 		String^ file;
 
+
+
 		if (Archivo->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			file = Archivo->SelectedPath;
 			TxtBuscador->Text = "" + file;
@@ -182,55 +186,69 @@ namespace TrabajoFinal {
 
 
 	private: System::Void BtnEsc_Click(System::Object^  sender, System::EventArgs^  e) {
-		cLista<cAlmacenador>List;
-		lstArchi->Items->Clear();
-		DirectoryInfo ^di = gcnew DirectoryInfo(TxtBuscador->Text);
+		if (TxtBuscador->Text != "") {
+			cLista<cAlmacenador>List;
+			lstArchi->Items->Clear();
+			DirectoryInfo ^di = gcnew DirectoryInfo(TxtBuscador->Text);
 
-		for each (auto item in di->GetFiles())
-		{
-			cAlmacenador nuevo;
+			for each (auto item in di->GetFiles())
+			{
+				cAlmacenador nuevo;
 
-			/////////////////////////////////////////////////////////////////////////////////////////////////
-			int EliminaExte = item->Name->LastIndexOf(".");
-			String ^Nombre = item->Name->Substring(0, EliminaExte);
+				/////////////////////////////////////////////////////////////////////////////////////////////////
+				int EliminaExte = item->Name->LastIndexOf(".");
+				String ^Nombre = item->Name->Substring(0, EliminaExte);
 
-			string nombre1 = msclr::interop::marshal_as<string>(Nombre);
+				string nombre1 = msclr::interop::marshal_as<string>(Nombre);
 
-			string inicio = msclr::interop::marshal_as<string>(item->Name->Substring(0, 1));
-			string ultima = msclr::interop::marshal_as<string>(item->Name->Substring(nombre1.length()-1, 1));
+				string inicio = msclr::interop::marshal_as<string>(item->Name->Substring(0, 1));
+				string ultima = msclr::interop::marshal_as<string>(item->Name->Substring(nombre1.length() - 1, 1));
 
-			/////////////////////////////////////////////////////////////////////////////////////////////////
-			nuevo.SET_Nombre(msclr::interop::marshal_as<string>(Nombre));
-			nuevo.SET_Contiene(EliminaExte);
-			nuevo.SET_LetraInicial(inicio);
-			nuevo.SET_LetraFinal(ultima);
-			/////////////////////////////////////////////////////////////////////////////////////////////////
-			nuevo.SET_Anio(item->CreationTime.Year);
-			nuevo.SET_Mes(item->CreationTime.Month);
-			nuevo.SET_Dia(item->CreationTime.Day);
-			////////////////////////////////////////////////////////
-			String ^Extension = item->Extension;
-			double Tamanio = item->Length;
-			////////////////////////////////////////////////////////]
-			nuevo.SET_Extension(msclr::interop::marshal_as<string>(Extension));
-			nuevo.SET_Tamaño(Tamanio);
-			////////////////////////////////////////////////////////]
-			List.InsertarInicio(nuevo);
-			//lblTitulo->Text = "" + msclr::interop::marshal_as<String ^>(nuevo.GET_LetraInicial());
-		}	
+				/////////////////////////////////////////////////////////////////////////////////////////////////
+				nuevo.SET_Nombre(msclr::interop::marshal_as<string>(Nombre));
+				nuevo.SET_Contiene(EliminaExte);
+				nuevo.SET_LetraInicial(inicio);
+				nuevo.SET_LetraFinal(ultima);
+				/////////////////////////////////////////////////////////////////////////////////////////////////
+				nuevo.SET_Anio(item->CreationTime.Year);
+				nuevo.SET_Mes(item->CreationTime.Month);
+				nuevo.SET_Dia(item->CreationTime.Day);
+				////////////////////////////////////////////////////////
+				String ^Extension = item->Extension;
+				double Tamanio = item->Length;
+				////////////////////////////////////////////////////////]
+				nuevo.SET_Extension(msclr::interop::marshal_as<string>(Extension));
+				nuevo.SET_Tamaño(Tamanio);
+				////////////////////////////////////////////////////////]
+				List.InsertarInicio(nuevo);
+				//lblTitulo->Text = "" + msclr::interop::marshal_as<String ^>(nuevo.GET_LetraInicial());
+			}
 
-		ShowList(List);		
+			ShowList(List);
+		}
+		
 	}
 	
+	int nl = 0;
+	String^ name;
 	template<class T>
 	void ShowList(cLista<T>l) {
 		cLista<T>::cIterador it;
 		for (it = l.inicial(); it != l.ultimo(); it++) {
-			lstArchi->Items->Add(msclr::interop::marshal_as<String^>((*it).GET_Nombre()) + "   " + (*it).GET_Anio() + " - " + (*it).GET_Mes() + " - " + (*it).GET_Dia()
-				+ "    " + (*it).GET_Tamanio() + "    " + msclr::interop::marshal_as<String^>((*it).GET_Extension())
-				+ "    " + msclr::interop::marshal_as<String^>((*it).GET_LetraInicial()) + "      " + msclr::interop::marshal_as<String^>((*it).GET_LetraFinal()) + "          " + (*it).GET_Contiene()
-			);
+			nl = (*it).GET_Contiene();
+			name = msclr::interop::marshal_as<String^>((*it).GET_Nombre());
+			if (nl <= 8) {
+				name += "		";
+			}
+			if (nl > 8) {
+				name += "	";
+			}
+			lstArchi->Items->Add(name + "	" + (*it).GET_Anio() + " - " + (*it).GET_Mes() + " - " + (*it).GET_Dia()
+				+ "	" + (*it).GET_Tamanio() + "	" + msclr::interop::marshal_as<String^>((*it).GET_Extension())
+				+ "	" + msclr::interop::marshal_as<String^>((*it).GET_LetraInicial()) + "	" + msclr::interop::marshal_as<String^>((*it).GET_LetraFinal()) + "	" + (*it).GET_Contiene());
 		}
 	}
+
+	
 };
 }
