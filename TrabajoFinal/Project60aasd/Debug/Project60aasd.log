@@ -1,0 +1,8 @@
+﻿  FileEx.cpp
+FileEx.cpp(50): warning C4244: 'argumento': conversión de '__int64' a 'double'; posible pérdida de datos
+  FileEx.cpp(159): note: vea la referencia a la creación de instancias de plantilla de función 'void Escanea<cAlmacenamiento,int>(System::String ^,ArbolAVL<cAlmacenamiento,int> *&)' que se está compilando
+FileEx.cpp(52): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\lucia\onedrive\documentos\visual studio 2015\projects\project60aasd\project60aasd\fileex.cpp(53): warning C4700: se utilizó la variable local 'archivos' sin inicializar
+  FileEx.obj : /DEBUG:FASTLINK no se admite cuando hay presente código administrado; reiniciando vínculo con /DEBUG:FULL
+  Project60aasd.vcxproj -> C:\Users\lucia\onedrive\documentos\visual studio 2015\Projects\Project60aasd\Debug\Project60aasd.exe
+  Project60aasd.vcxproj -> C:\Users\lucia\onedrive\documentos\visual studio 2015\Projects\Project60aasd\Debug\Project60aasd.pdb (Partial PDB)
